@@ -3,7 +3,7 @@ require 'active_support/core_ext/string/inflections.rb'
 require 'pg'
 require 'sequel'
 require 'json'
-require 'debugger'
+#require 'debugger'
 
 require "rb_routing/version"
 require "rb_routing/connection"

@@ -137,11 +137,7 @@ module RbRouting
     #   }
     def results_query_select
       {
-        'seq'           => :seq,
-        'node'          => :id1,
-        'edge'          => :id2,
-        'cost'          => :cost,
-        'reverse_cost'  => :cost
+        'agg_cost'      => :agg_cost
       }
     end
 
@@ -159,12 +155,12 @@ module RbRouting
 
     def cost_query
       select_args = cost_query_select.map {|k,v| Sequel.as(v, k) }
-      db.select(*select_args).from(cost_query_from).where(cost_query_where)
+      db.select(*select_args).from(cost_query_from)
     end
 
     def results_query
       select_args = results_query_select.map {|k,v| Sequel.as(v, k) }
-      db.select(*select_args).from(*results_query_from).where(results_query_where)
+      db.select(*select_args).from(*results_query_from).order(:seq).last
     end
 
     def routing_function
@@ -220,14 +216,14 @@ module RbRouting
       puts "Routing options: #{options}" if options[:debug]
 
       begin
-        @result = results_query.to_a
-        @path = path_class.new @result
+        @result = results_query
       rescue => e
+        raise e
         @errors << "#{e}: #{e.backtrace}"
         return false
       end
 
-      true
+      @result
     end
 
   end

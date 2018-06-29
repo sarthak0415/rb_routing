@@ -14,14 +14,12 @@ module RbRouting
         {
           :sql                  => cost_query.sql,
           :source               => :required,
-          :target               => :required,
-          :directed             => false,
-          :has_reverse_cost     => false
+          :target               => :required
         }
       end
 
       def routing_function_definition
-        {:pgr_dijkstra => [:sql, :source, :target, :directed, :has_reverse_cost]}
+        {:pgr_dijkstra => [:sql, :source, :target]}
       end
 
     end
