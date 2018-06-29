@@ -17,7 +17,7 @@ CREATE EXTENSION hstore;
 osm2pgrouting --f iiit_map.osm --conf mapconfig.xml --dbname routing --username sarthak --clean
 ```
 
-```bash
+```shell
 sudo rm pkg/rb_routing-0.0.1.gem
 rake install 
 gem install  pkg/rb_routing-0.0.1.gem
