@@ -1,4 +1,4 @@
-```
+```sql
 #Postgres start server  
 brew services start postgresql
 
