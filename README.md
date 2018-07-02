@@ -14,7 +14,7 @@ create extension postgis;
 create extension pgrouting;
 CREATE EXTENSION hstore;
 
-osm2pgrouting --f iiit_map.osm --conf mapconfig.xml --dbname routing --username sarthak --clean
+osm2pgrouting --f iiit.osm --conf mapconfig.xml --dbname routing --username sarthak --clean
 ```
 
 ```shell

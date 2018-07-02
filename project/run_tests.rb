@@ -2,6 +2,8 @@ require 'pp'
 require 'rb_routing'
 require "benchmark"
 
+dataset_name = ARGV[0]
+
 def get_vertices(db, percentage)
     vertices = db[:ways_vertices_pgr]
     node_ids = []
@@ -13,9 +15,7 @@ def get_vertices(db, percentage)
     return node_ids.shuffle.first(needed_size.to_i)
 end
 
-def run_tests(percentage)
-    dataset_name = 'iiit'
-
+def run_tests(dataset_name, percentage)
     router = RbRouting::Router::Dijkstra.new  :host => 'localhost', :database => dataset_name, :user => 'sarthak', :edge_table => :ways ,:id => :gid, :cost => :cost, :reverse_cost => :reverse_cost 
     db = router.db
 
@@ -36,10 +36,11 @@ end
 
 test_results = {}
 
-test_results[1] = run_tests(10)
-test_results[10] = run_tests(20)
-test_results[50] = run_tests(80)
-test_results[100] = run_tests(100)
+test_results[1] = run_tests(dataset_name, 10)
+test_results[10] = run_tests(dataset_name, 20)
+test_results[50] = run_tests(dataset_name, 75)
+test_results[100] = run_tests(dataset_name, 100)
 
 
-File.open('test_results', 'w') { |file| file.write(test_results) }
+output_file_name = dataset_name + "_test_results.txt"
+File.open(output_file_name, 'w') { |file| file.write(test_results) }
