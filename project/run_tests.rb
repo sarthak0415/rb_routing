@@ -36,9 +36,9 @@ end
 
 test_results = {}
 
-test_results[1] = run_tests(dataset_name, 10)
-test_results[10] = run_tests(dataset_name, 20)
-test_results[50] = run_tests(dataset_name, 75)
+test_results[1] = run_tests(dataset_name, 1)
+test_results[10] = run_tests(dataset_name, 10)
+test_results[50] = run_tests(dataset_name, 50)
 test_results[100] = run_tests(dataset_name, 100)
 
 
