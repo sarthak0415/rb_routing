@@ -23,12 +23,12 @@ def run_tests(dataset_name, percentage)
     dest_vertices = get_vertices(db, percentage)
 
     time = 0
-    sources_vertices.each do |source|
-        dest_vertices.each do |dest|
-            time += Benchmark.realtime do
+    time += Benchmark.realtime do
+        sources_vertices.each do |source|
+            dest_vertices.each do |dest|
                 router.run :source => source, :target => dest
             end
-        end
+        end        
     end
     return time
 end
